@@ -7,7 +7,7 @@ It keeps track of TAs’ students, tutorial groups, and tasks.
 ![Ui](docs/images/Ui.png)
 
 ## More information
-* You can find the User Guide and more information [here](https://nus-cs2103-ay2223s1.github.io/tp/).
+* You can find the User Guide and more information [here](https://ay2223s1-cs2103t-t13-1.github.io/tp/).
  
 ## Acknowledgements
 This project is based on the AddressBook-Level3 project
