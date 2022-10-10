@@ -12,8 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
-import seedu.address.model.task.Task;
 import seedu.address.model.student.TutorialGroup;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.

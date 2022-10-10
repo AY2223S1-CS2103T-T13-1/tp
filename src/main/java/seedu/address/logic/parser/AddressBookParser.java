@@ -19,11 +19,11 @@ import seedu.address.logic.commands.StudentAddCommand;
 import seedu.address.logic.commands.StudentDeleteCommand;
 import seedu.address.logic.commands.StudentEditCommand;
 import seedu.address.logic.commands.StudentListCommand;
+import seedu.address.logic.commands.TaskAddCommand;
+import seedu.address.logic.commands.TaskEditCommand;
 import seedu.address.logic.commands.TutorialGroupAddCommand;
 import seedu.address.logic.commands.TutorialGroupDeleteCommand;
 import seedu.address.logic.commands.TutorialGroupListCommand;
-import seedu.address.logic.commands.TaskAddCommand;
-import seedu.address.logic.commands.TaskEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

@@ -2,8 +2,8 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
-import seedu.address.model.task.Task;
 import seedu.address.model.student.TutorialGroup;
+import seedu.address.model.task.Task;
 
 /**
  * Unmodifiable view of an address book
