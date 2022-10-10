@@ -4,6 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+TaskManager *-right-> "1" UniqueTutorialGroupList
 TaskManager *-right-> "1" UniqueStudentList
 TaskManager *-right-> "1" UniqueTagList
 TaskManager *-right-> "1" UniqueTaskList
@@ -22,6 +23,7 @@ Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> TutorialGroup
+UniqueTutorialGroupList *--> TutorialGroup
 
 Task *--> TaskName
 Task *--> TaskDescription

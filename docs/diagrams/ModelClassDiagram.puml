@@ -14,6 +14,7 @@ Class UserPrefs
 
 Class UniqueTaskList
 Class UniqueStudentList
+Class UniqueTutorialGroupList
 Class Student
 Class Task
 Class Email
@@ -41,8 +42,10 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 TaskManager *--> "1" UniqueStudentList
 TaskManager *--> "1" UniqueTaskList
+TaskManager *--> "1" UniqueTutorialGroupList
 UniqueStudentList --> "~* all" Student
 UniqueTaskList --> "~* all" Task
+UniqueTutorialGroupList --> "~* all" TutorialGroup
 Student *--> Name
 Student *--> Phone
 Student *--> Email
