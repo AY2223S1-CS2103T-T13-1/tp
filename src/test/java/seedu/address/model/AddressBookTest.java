@@ -106,7 +106,6 @@ public class AddressBookTest {
             return tasks;
         }
 
-
         @Override
         public ObservableList<TutorialGroup> getTutorialGroupList() {
             return tutorialGroups;
