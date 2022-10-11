@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.student;
 
 import static java.util.Objects.requireNonNull;
 
@@ -6,6 +6,8 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
@@ -15,7 +17,7 @@ import seedu.address.model.student.Student;
  */
 public class StudentDeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "studentDelete";
+    public static final String COMMAND_WORD = "student delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed person list.\n"
