@@ -6,10 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_STUDENT;
-//import java.util.Collection;
-//import java.util.Collections;
-//import java.util.Optional;
-//import java.util.Set;
 
 import java.util.List;
 
