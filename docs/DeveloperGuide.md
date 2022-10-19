@@ -215,6 +215,30 @@ Step 3. The user executes `tutorialAdd g/T03` command to add a new tutorial grou
 
 Step 4. The user executes `studentEdit 1 g/T03` command to assign the first student to the newly created tutorial group.
 
+### Task feature
+
+#### Implementation
+
+The task feature is facilitated by `Task`. It implements the following operations:
+* Adding Tasks using a Name, Description, Deadline and assigned students (Optional)
+* Deleting Tasks using the Task's index
+* Editing Tasks using the Task's index
+* Marking Tasks as done using the Task's index (In Progress)
+* Viewing Tasks
+
+The implementation is quite similar to what was done for the base AB3, as well as
+the tutorial group and student feature. However, there were a few differences in the
+implementation that we had to take note of.
+
+The main issue comes with the ability to edit tasks. In `TutorialGroup` and `Student`,
+the implementation of the edit command was quite simple, which was to have a class to store all the changes
+and merge them with the states in the `Model`. However, in `Task`, the implementation was a bit more complex,
+as we had to take into account the students assigned to the task. We couldn't create new Students and then edit
+the task, since the students would be new and not in the `Model` yet. Thus, we had to use a different method,
+instead opting to defer the creation of the new `Task` to the `Model` itself. This was done by rewriting the
+code to parse in all the fields of `Task` and leaving student as a list of Strings, which we then use to search through
+the `Model` to find the students that are assigned to the task.
+
 ### Expanding `TaskListCard` Feature
 
 #### Description
