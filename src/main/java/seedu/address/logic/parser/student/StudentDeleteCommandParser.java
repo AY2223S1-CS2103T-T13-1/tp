@@ -19,8 +19,8 @@ public class StudentDeleteCommandParser implements Parser<StudentDeleteCommand> 
      */
     public StudentDeleteCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new StudentDeleteCommand(index);
+            Index[] indexes = ParserUtil.parseIndexes(args);
+            return new StudentDeleteCommand(indexes);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, StudentDeleteCommand.MESSAGE_USAGE), pe);
