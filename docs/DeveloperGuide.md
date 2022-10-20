@@ -217,6 +217,11 @@ Step 4. The user executes `studentEdit 1 g/T03` command to assign the first stud
 
 ### Task feature
 
+#### Description
+
+The task features is an extension on AB3 to add a list of tasks to the `Model` that we then use to track different
+tasks that the user has to complete.
+
 #### Implementation
 
 The task feature is facilitated by `Task`. It implements the following operations:
@@ -225,6 +230,8 @@ The task feature is facilitated by `Task`. It implements the following operation
 * Editing Tasks using the Task's index
 * Marking Tasks as done using the Task's index (In Progress)
 * Viewing Tasks
+
+#### Design Considerations
 
 The implementation is quite similar to what was done for the base AB3, as well as
 the tutorial group and student feature. However, there were a few differences in the
@@ -238,6 +245,29 @@ the task, since the students would be new and not in the `Model` yet. Thus, we h
 instead opting to defer the creation of the new `Task` to the `Model` itself. This was done by rewriting the
 code to parse in all the fields of `Task` and leaving student as a list of Strings, which we then use to search through
 the `Model` to find the students that are assigned to the task.
+
+### Mass Actions feature
+
+#### Description
+The idea behind Mass Actions is to be able to chain together multiple commands without having to type them out one 
+by one. This is useful for when the user wants to perform the same action on multiple students or tutorial groups.
+
+#### Implementation
+The mass actions feature requires a rework of the parsers, particularly StudentDeleteCommandParser 
+and TaskDeleteCommandParser. Instead of parsing a single index, the parsers will parse a range of indices,
+then loop through each index, getting the task before deleting it.
+
+#### Design Considerations
+The implementation is different from the original AB3 implementation, as there were some special considerations
+to keep in mind. The key issue was that we had to do two separate loops, one for getting the list of tasks/students
+to delete, before then proceeding to delete them. This is because if we attempt to do it in a single loop, we 
+encounter an error where the list of tasks/students is modified while we are iterating through it.
+
+#### Alternative Considerations
+Another way of doing this instead of completely reworking the commands would be to overload the constructor,
+however, it seemingly would not be as clean as the current implementation, as the current implementation is able
+to handle one or more indices, while the alternative implementation would be doing double work to cover the case with
+one index.
 
 ### Expanding `TaskListCard` Feature
 
