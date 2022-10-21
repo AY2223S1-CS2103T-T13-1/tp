@@ -25,7 +25,7 @@ public class StudentDeleteCommand extends Command {
             + ": Deletes the student identified by the index number (separated by whitespace)"
             + "used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " 1 2 4";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
 
