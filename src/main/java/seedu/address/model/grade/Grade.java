@@ -15,7 +15,7 @@ public class Grade {
     private final Student student;
     private final Task task;
     // Data field
-    private boolean isGraded = false;
+    private final GradeState gradeState;
 
     /**
      * Constructs a Grade object which represents the state of not being graded by default.
@@ -26,40 +26,27 @@ public class Grade {
         requireAllNonNull(student, task);
         this.student = student;
         this.task = task;
+        this.gradeState = new GradeState(false);
     }
 
     /**
      * Constructs a Grade object.
      * @param student student who is graded, must not be null
      * @param task task that is graded, must not be null
-     * @param isGraded whether the task is graded or not
+     * @param gradeState whether the task is graded or not
      */
-    public Grade(Student student, Task task, boolean isGraded) {
+    public Grade(Student student, Task task, GradeState gradeState) {
         requireAllNonNull(student, task);
         this.student = student;
         this.task = task;
-        this.isGraded = isGraded;
-    }
-
-    /**
-     * Changes the grade status to graded
-     */
-    public void setAsGraded() {
-        this.isGraded = true;
-    }
-
-    /**
-     * Changes the grade status to not graded
-     */
-    public void setAsNotGraded() {
-        this.isGraded = false;
+        this.gradeState = gradeState;
     }
 
     /**
      * Get the grade status of the task
      * @return true if the task is graded for the student, false otherwise
      */
-    public boolean isGraded() {
-        return isGraded;
+    public GradeState getGradeState() {
+        return this.gradeState;
     }
 }
