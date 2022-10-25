@@ -39,6 +39,20 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses {@code Collection<String> indexes} into a {@code Index[]}. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if any of the specified indexes are invalid (not non-zero unsigned integer).
+     */
+    public static Index[] parseIndexes(String arguments) throws ParseException {
+        String[] indexes = arguments.trim().split("\\s+");
+        Index[] indexArray = new Index[indexes.length];
+        for (int i = 0; i < indexes.length; i++) {
+            indexArray[i] = parseIndex(indexes[i]);
+        }
+        return indexArray;
+    }
+
     //Student Parser Util
 
     /**
@@ -184,8 +198,10 @@ public class ParserUtil {
     public static TaskDeadline parseTaskDeadline(String taskDeadline) throws ParseException {
         requireNonNull(taskDeadline);
         String trimmedTaskDeadline = taskDeadline.trim();
-        if (!TaskDeadline.isValidDeadline(trimmedTaskDeadline)) {
+        if (!TaskDeadline.isInDeadlineFormat(trimmedTaskDeadline)) {
             throw new ParseException(TaskDeadline.MESSAGE_CONSTRAINTS);
+        } else if (!TaskDeadline.isValidDate(trimmedTaskDeadline)) {
+            throw new ParseException(TaskDeadline.MESSAGE_INVALID_DATE);
         }
         return new TaskDeadline(trimmedTaskDeadline);
     }

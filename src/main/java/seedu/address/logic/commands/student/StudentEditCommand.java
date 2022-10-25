@@ -78,7 +78,7 @@ public class StudentEditCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
@@ -86,11 +86,6 @@ public class StudentEditCommand extends Command {
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        if (studentToEdit.belongsTo(editedStudent.getTutorialGroup())
-                && !model.hasTutorialGroup(editedStudent.getTutorialGroup())) {
-            throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
         }
 
         model.setStudent(studentToEdit, editedStudent);
