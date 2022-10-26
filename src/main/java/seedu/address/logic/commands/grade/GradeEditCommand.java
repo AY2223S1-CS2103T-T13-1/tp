@@ -2,15 +2,13 @@ package seedu.address.logic.commands.grade;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.student.StudentEditCommand;
 import seedu.address.model.Model;
 import seedu.address.model.grade.Grade;
+import seedu.address.model.grade.GradeKey;
 import seedu.address.model.student.*;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
 import java.util.*;
@@ -56,16 +54,17 @@ public class GradeEditCommand extends Command {
         List<Student> lastShownStudentList = model.getFilteredStudentList();
         List<Task> lastShownTaskList = model.getFilteredTaskList();
 
-        if (studentIndex.getZeroBased() >= lastShownStudentList.size()
-                || taskIndex.getZeroBased() >= lastShownTaskList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (studentIndex.getZeroBased() >= lastShownStudentList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        } else if (taskIndex.getZeroBased() >= lastShownTaskList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+
         // TODO check if student is in task
         Student studentGradeToEdit = lastShownStudentList.get(studentIndex.getZeroBased());
         Task taskGradeToEdit = lastShownTaskList.get(taskIndex.getZeroBased());
-        Grade gradeToEdit = model.getGrade(studentGradeToEdit, taskGradeToEdit);
         Grade editedGrade = createEditedGrade(studentGradeToEdit, taskGradeToEdit, editGradeDescriptor);
-        model.setGrade(gradeToEdit, editedGrade);
+        model.addGrade(new GradeKey(studentGradeToEdit, taskGradeToEdit), editedGrade);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_GRADE_SUCCESS, studentGradeToEdit, taskGradeToEdit));
@@ -79,8 +78,7 @@ public class GradeEditCommand extends Command {
         assert student != null;
         assert task != null;
 
-        Grade updatedGrade = editGradeDescriptor.getGrade();
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags, updatedTutorialGroup);
+        return editGradeDescriptor.getGrade();
     }
 
     @Override
@@ -91,14 +89,15 @@ public class GradeEditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StudentEditCommand)) {
+        if (!(other instanceof GradeEditCommand)) {
             return false;
         }
 
         // state check
-        StudentEditCommand e = (StudentEditCommand) other;
-        return index.equals(e.index)
-                && editStudentDescriptor.equals(e.editStudentDescriptor);
+        GradeEditCommand e = (GradeEditCommand) other;
+        return this.studentIndex.equals(e.studentIndex)
+                && this.taskIndex.equals(e.taskIndex)
+                && this.editGradeDescriptor.equals(e.editGradeDescriptor);
     }
 
     /**
@@ -116,13 +115,6 @@ public class GradeEditCommand extends Command {
          */
         public EditGradeDescriptor(EditGradeDescriptor toCopy) {
             setGrade(toCopy.grade);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(grade);
         }
 
         public void setGrade(Grade grade) {

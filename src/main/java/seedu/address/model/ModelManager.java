@@ -4,13 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.grade.Grade;
+import seedu.address.model.grade.GradeKey;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 import seedu.address.model.task.Task;
@@ -26,6 +31,7 @@ public class ModelManager implements Model {
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Task> filteredTasks;
     private final FilteredList<TutorialGroup> filteredTutorialGroups;
+    private final ObservableMap<GradeKey, Grade> grades;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,6 +46,7 @@ public class ModelManager implements Model {
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
         filteredTutorialGroups = new FilteredList<>(this.addressBook.getTutorialGroupList());
+        grades = FXCollections.observableMap(this.addressBook.getGradeList());
     }
 
     public ModelManager() {
@@ -219,6 +226,32 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
+
+    //=========== Grade Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the map of {@code (GradeKey, Grade)} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableMap<GradeKey, Grade> getGradeMap() {
+        return grades;
+    }
+
+    //=========== Grade ================================================================================
+
+    @Override
+    public boolean hasGradeKey(GradeKey gradeKey) {
+        requireNonNull(gradeKey);
+        return addressBook.hasGradeKey(gradeKey);
+    }
+
+    @Override
+    public void addGrade(GradeKey gradeKey, Grade grade) {
+        addressBook.addGrade(gradeKey, grade);
+        //TODO: Show grade somehow
+    }
+
 
     @Override
     public boolean equals(Object obj) {
