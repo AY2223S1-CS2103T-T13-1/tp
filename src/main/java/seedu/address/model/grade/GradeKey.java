@@ -40,7 +40,16 @@ public class GradeKey {
         return ((GradeKey) otherGradeKey).task.equals(this.task);
     }
 
+    @Override
     public int hashCode() {
         return Objects.hash(this.student, this.task);
+    }
+
+    public Student getStudent() {
+        return this.student;
+    }
+
+    public Task getTask() {
+        return this.task;
     }
 }

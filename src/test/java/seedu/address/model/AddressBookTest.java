@@ -13,11 +13,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import javafx.collections.ObservableMap;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.GradeKey;
 import seedu.address.model.student.Student;
@@ -111,7 +111,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableMap<GradeKey, Grade> getGradeList() {
+        public ObservableMap<GradeKey, Grade> getGradeMap() {
             return grades;
         }
 

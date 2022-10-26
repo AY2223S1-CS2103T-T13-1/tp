@@ -3,20 +3,15 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.GradeKey;
 import seedu.address.model.student.exceptions.DuplicateGradeKeyException;
-import seedu.address.model.student.exceptions.DuplicateTutorialGroupException;
 import seedu.address.model.student.exceptions.GradeKeyNotFoundException;
-import seedu.address.model.student.exceptions.TutorialGroupNotFoundException;
 
 
 /**

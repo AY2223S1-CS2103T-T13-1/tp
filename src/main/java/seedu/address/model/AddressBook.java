@@ -8,7 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.GradeKey;
-import seedu.address.model.student.*;
+import seedu.address.model.student.GradeMap;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialGroup;
+import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.student.UniqueTutorialGroupList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -225,7 +229,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableMap<GradeKey, Grade> getGradeList() {
+    public ObservableMap<GradeKey, Grade> getGradeMap() {
         return grades.asUnmodifiableObservableMap();
     }
 

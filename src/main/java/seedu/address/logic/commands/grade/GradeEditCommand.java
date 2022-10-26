@@ -1,5 +1,12 @@
 package seedu.address.logic.commands.grade;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -8,16 +15,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.GradeKey;
-import seedu.address.model.student.*;
+import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 
-import java.util.*;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-
+/**
+ * Edits the grade of an existing student-task pair in the address book.
+ */
 public class GradeEditCommand extends Command {
     public static final String COMMAND_WORD = "gradeEdit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the grade of the student's task "

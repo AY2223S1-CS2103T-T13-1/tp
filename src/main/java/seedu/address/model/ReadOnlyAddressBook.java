@@ -32,8 +32,8 @@ public interface ReadOnlyAddressBook {
     ObservableList<Task> getTaskList();
 
     /**
-     * Returns an unmodifiable view of the grades list.
+     * Returns an unmodifiable view of the grades map.
      */
-    ObservableMap<GradeKey, Grade> getGradeList();
+    ObservableMap<GradeKey, Grade> getGradeMap();
 
 }

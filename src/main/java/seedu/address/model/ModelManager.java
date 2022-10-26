@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -46,7 +45,7 @@ public class ModelManager implements Model {
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
         filteredTutorialGroups = new FilteredList<>(this.addressBook.getTutorialGroupList());
-        grades = FXCollections.observableMap(this.addressBook.getGradeList());
+        grades = FXCollections.observableMap(this.addressBook.getGradeMap());
     }
 
     public ModelManager() {
