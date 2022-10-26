@@ -28,7 +28,7 @@ faster than traditional GUI apps.
 
 ## Features
 
-### Add students : 
+### Add students :
 
 - Command `student add n/studentName p/phoneNumber e/email g/tutorialGroup(optional) t/tags(optional)`
 - Adds a student with the given phone number, email, tutorial group, and tags to the list of students
@@ -43,7 +43,7 @@ Notes:
 - `<tutorialGroup>` should follow the format Txx, where x is a numeric value, and it should not be blank
 - `<tags>` should be alphanumeric with no white space
 
-### Remove students : 
+### Remove students :
 
 - Command `student delete <index>`
 - Removes the student from the list of students with the given index
@@ -51,7 +51,7 @@ Notes:
 Notes:
 - `index` must be a positive integer and must correspond to an existing student
 
-### Edit students : 
+### Edit students :
 
 - Command `student edit <index> n/<studentName>(optional) p/<studentPhone>(optional) e/<studentEmail>(optional) g/<tutorialGroup>(optional) t/<tag>(optional)`
 - Edits the student by its given index with at least 1 variable specified to change.
@@ -59,13 +59,13 @@ Notes:
 Notes:
 - `index` must be a positive integer and must correspond to an existing student
 
-### List students : 
+### List students :
 
 - Command `student list`
 - Abbreviate with `students`
 - Shows a list of all students
 
-### Add new task : 
+### Add new task :
 
 - Command `task add tn/<taskName> i/<taskDescription> d/<taskDeadline> s/<student(s)>(optional)`
 - Adds a task to the list of tasks
@@ -77,7 +77,7 @@ Notes:
 - `taskDeadline` should be in the format of DD/MM/YYYY with its days and months within range
 - `student(s)`, referenced by their name, should exist
 
-### Remove task : 
+### Remove task :
 
 - Command `task delete <index>`
 - Removes the indexed task from the list of tasks
@@ -85,7 +85,7 @@ Notes:
 Notes:
 - `index` must be a positive integer and valid
 
-### Edit task : 
+### Edit task :
 
 - Command `task edit <index> tn/<taskName>(optional) i/<taskDescription>(optional) d/<taskDeadline>(optional) s/<student(s)>(optional)`
 - Edits the task by its given index with at least 1 variable specified to change.
@@ -93,49 +93,49 @@ Notes:
 Notes:
 - `index` must be a positive integer and valid
 
-### List tasks : 
+### List tasks :
 
 - Command `task list`
 - Abbreviate with `tasks`
 - Shows a list of tasks
 
-### Mark tasks : 
+### Mark tasks :
 
 - Command `task mark i/<taskNumber>`
 - Marks the task with the task number on the list.
 
-### Unmark tasks : 
+### Unmark tasks :
 
 - Command `task unmark i/<taskNumber>`
 - Unmarks the task with the task number on the list.
 
-### Assign a task to a student : 
+### Assign a task to a student :
 
 - Command `task assign n/<taskName> n/<studentName>`
 - Assign the task `taskName` to the student `studentName`.
 
-### Add new tutorial group : 
+### Add new tutorial group :
 
 - Command `tutorialAdd g/<tutorialGroup>`
 - Adds the tutorial group with the name `tutorialGroup`
 
 
-### Remove tutorial group : 
+### Remove tutorial group :
 
 - Command `tutorial delete g/<tutorialGroup>`
 - Removes the tutorial group with the name `tutorialGroup`
 
-### Enroll a student into a group : 
+### Enroll a student into a group :
 
 - Command `student enroll i g/<groupName>`
 - Enrolls the student at index i to the group named `groupName`
 
-### Expel a student from a group `To be implemented` : 
+### Expel a student from a group `To be implemented` :
 
 - Command `group expel g/<groupName> g/<studentName>`
 - Removes the student `studentName` from the group `groupName`.
 
-### View the list of students in a group : 
+### View the list of students in a group :
 
 - Command `group roster n/<groupName>`
 - Displays a list of students enrolled in `groupName`.
@@ -154,16 +154,16 @@ _Details coming soon..._
 - Check the format of your add command. You can refer to the pop-up message or the help page for the command format.
 - Check if the name of the new student belongs to another student.
 
-#### Why I cannot enroll a student to a tutorial group? 
+#### Why I cannot enroll a student to a tutorial group?
 - Check whether the specified student and tutorial group exist.
 - Check if you input the correct student name.
-- 
+
 #### What if I just want to modify one field of a student? Do I need to type out the rest fields?
 - The student edit command supports any number of field changes. Omit the fields you do not wish to change.
 
 #### How to remove the student filter?
 
-#### 
+####
 
 _Details coming soon..._
 
