@@ -10,6 +10,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.grade.GradeEditCommand;
+import seedu.address.logic.commands.grade.GradeViewCommand;
 import seedu.address.logic.commands.student.StudentAddCommand;
 import seedu.address.logic.commands.student.StudentDeleteCommand;
 import seedu.address.logic.commands.student.StudentEditCommand;
