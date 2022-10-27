@@ -50,13 +50,12 @@ public class StudentAddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         TutorialGroup toAddTG = toAdd.getTutorialGroup();
-        if (!toAddTG.isDefaultTutorialGroup() && !model.hasTutorialGroup(toAddTG)) {
-            throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
-        }
         if (model.hasStudent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
+        if (!toAddTG.isDefaultTutorialGroup() && !model.hasTutorialGroup(toAddTG)) {
+            throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
+        }
         model.addStudent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
