@@ -34,7 +34,7 @@ public class StudentAddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
-
+    public static final String MESSAGE_TUTORIAL_GROUP_NOT_FOUND = "This tutorial group is not found.";
     private final Student toAdd;
 
     /**
@@ -49,6 +49,9 @@ public class StudentAddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (!model.hasTutorialGroup(toAdd.getTutorialGroup())) {
+            throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
+        }
         if (model.hasStudent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
