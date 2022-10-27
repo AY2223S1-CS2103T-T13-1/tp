@@ -22,7 +22,7 @@ import seedu.address.model.task.Task;
  * Edits the grade of an existing student-task pair in the address book.
  */
 public class GradeEditCommand extends Command {
-    public static final String COMMAND_WORD = "gradeEdit";
+    public static final String COMMAND_WORD = "grade edit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the grade of the student's task "
             + "by the index number used in the displayed student list and task list. "
             + "Existing values will be overwritten by the input values.\n"
