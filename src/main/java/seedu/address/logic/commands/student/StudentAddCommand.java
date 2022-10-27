@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialGroup;
 
 /**
  * Adds a student to the address book.
@@ -48,8 +49,8 @@ public class StudentAddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (!model.hasTutorialGroup(toAdd.getTutorialGroup())) {
+        TutorialGroup toAddTG = toAdd.getTutorialGroup();
+        if (!toAddTG.isDefaultTutorialGroup() && !model.hasTutorialGroup(toAddTG)) {
             throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
         }
         if (model.hasStudent(toAdd)) {

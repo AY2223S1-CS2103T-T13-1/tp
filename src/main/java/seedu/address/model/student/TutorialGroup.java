@@ -85,6 +85,8 @@ public class TutorialGroup {
         return !this.equals(EMPTY_TUTORIAL_GROUP);
     }
 
+    public boolean isDefaultTutorialGroup() { return tutorialGroup.equals(DEFAULT_TUTORIAL_GROUP); }
+
 
     @Override
     public String toString() {
