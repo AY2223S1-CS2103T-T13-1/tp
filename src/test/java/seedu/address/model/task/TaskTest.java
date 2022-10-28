@@ -168,27 +168,27 @@ class TaskTest {
     @Test
     void oneStudent_testToString() {
         String correct =
-                "Pass Test\nTask Description: \n" +
-                        "Pass all the build tests.\nTask Deadline: \n2020-30-02\nStudents: \nAlexa\n";
+                "Pass Test\nTask Description: \n"
+                        + "Pass all the build tests.\nTask Deadline: \n2020-30-02\nStudents: \nAlexa\n";
         assertEquals(oneStudentTask.toString(), correct);
     }
 
     @Test
     void noStudent_testToString() {
         String correct =
-                "Pass Test\nTask Description: \n" +
-                        "Pass all the build tests.\nTask Deadline: \n2020-30-02\nStudents: \nNone";
+                "Pass Test\nTask Description: \n"
+                        + "Pass all the build tests.\nTask Deadline: \n2020-30-02\nStudents: \nNone";
         assertEquals(noStudentTask.toString(), correct);
     }
 
     @Test
     void twoStudents_testToString() {
         String correct =
-                "Pass Test\nTask Description: \n" +
-                        "Pass all the build tests.\nTask Deadline: \n2020-30-02\nStudents: \nAlexa\nSiri\n";
+                "Pass Test\nTask Description: \n"
+                        + "Pass all the build tests.\nTask Deadline: \n2020-30-02\nStudents: \nAlexa\nSiri\n";
         String alsoCorrect =
-                "Pass Test\nTask Description: \n" +
-                        "Pass all the build tests.\nTask Deadline: \n2020-30-02\nStudents: \nSiri\nAlexa\n";
+                "Pass Test\nTask Description: \n"
+                        + "Pass all the build tests.\nTask Deadline: \n2020-30-02\nStudents: \nSiri\nAlexa\n";
         assertTrue(isEither(twoStudentsTask.toString(), correct, alsoCorrect));
     }
 
