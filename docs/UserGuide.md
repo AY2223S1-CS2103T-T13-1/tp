@@ -272,7 +272,7 @@ Shows a list of tasks
 
 <img src="images/task list.png" width="500">
 
-### Tutorial Group
+### Tutorial Groups
 
 #### Add new tutorial group
 
