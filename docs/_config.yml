@@ -1,5 +1,5 @@
 title: "TAA"
-theme: hacker
+remote-theme: pages-themes/hacker
 
 header_pages:
   - UserGuide.md
