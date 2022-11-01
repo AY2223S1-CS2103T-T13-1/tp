@@ -80,6 +80,7 @@ This section shows a quick summary of a list of commands that are available in T
 ### Tutorial Groups
 
 | Action                                                                    | Format, Examples                                                                                                                                                                 |
+|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Add tutorial group](#add-new-tutorial-group)**                         | `tutorial add g/<tutorialGroup>` e.g. `tutorial add g/T01`                                                                                                                       |
 | **[Remove tutorial group](#remove-tutorial-group)**                       | `tutorial delete g/<tutorialGroup>` e.g. `tutorial delete g/T01`                                                                                                                 |
 | **[Enrol student](#enroll-a-student-into-a-group)**                       | `student enroll <index> g/<groupName>` e.g. `student enrol 1 g/T03`                                                                                                              |
@@ -90,6 +91,7 @@ This section shows a quick summary of a list of commands that are available in T
 ### Grades
 
 | Action                                                                    | Format, Examples                                                                                                                                                                 |
+|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Mark assignment as graded](#mark-assignment-as-graded-or-ungraded)**   | `grade edit <studentIndex> <taskIndex> gr/T` e.g. `grade edit 1 1 gr/T`                                                                                                          |
 | **[Mark assignment as ungraded](#mark-assignment-as-graded-or-ungraded)** | `grade edit <studentIndex> <taskIndex> gr/F` e.g. `grade edit 2 1 gr/F`                                                                                                          |
 | **[View assignment grading status](#display-assignment-grade-status)**    | `grade view <studentIndex> <taskIndex>` e.g. `grade view 3 7`                                                                                                                    |
@@ -97,6 +99,7 @@ This section shows a quick summary of a list of commands that are available in T
 ### General
 
 | Action                                                                    | Format, Examples                                                                                                                                                                 |
+|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Display the user guide URL](#display-user-guide-url)**                 | `help me`                                                                                                                                                                        |
 | **[Exit the app](#exit-the-app)**                                         | `bye bye`                                                                                                                                                                        |
 
