@@ -22,7 +22,7 @@ for a quick overview of the commands.
 ---
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 ---
 
