@@ -3,39 +3,90 @@ layout: page
 title: User Guide
 ---
 
-Teaching Assistant Assistant (TAA) is a **desktop app for Teaching Assistants (TA) to track student progress and tasks,
+## Welcome to the TAA User Guide!
+![TAA](/images/taa_main.png)
+
+* Teaching Assistant Assistant (TAA)* is a **desktop app for Teaching Assistants (TA) to track student progress and tasks,
 optimized for use via a Command Line Interface** (CLI) while still having the
 benefits of a Graphical User Interface (GUI). If you can type fast, TAA can get your students and tasks management done
 faster than traditional GUI apps.
 
-This document will guide you on the usage of TAA, with explanations of the commands and examples on how to use the application so that you will have a seamless experience in using TAA.
-
-* Table of Contents
-{:toc}
+### Using this guide
+If you are viewing this for the first time, you may want to read the [Getting Started](#Getting Started) section first.
+* Check out our [Quick Start](#Quick Start) section for a quick overview of setting up the app for the first time.
+* If you are a new user, you may want to check out the [Command Summary](#Command Summary) section 
+for a quick overview of the commands.
+* If you have any questions, do check out our [FAQ](#FAQ) section for answers to common questions.
+* If you are interested in helping to develop TAA, check out our [Developer Guide](DeveloperGuide.md).
 
 ---
 
-## Quick start
+* Table of Contents
+  {:toc}
+
+---
+
+## Getting started
+
+If you are new to TAA, this section serves as an introduction to the app and it's functionalities.
+
+### What is TAA?
+TAA is a student developed, open source desktop application for **Teaching Assistants (TA) to track students' progress
+and tasks.**
+
+### Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest TAA.jar from [here](https://github.com/AY2223S1-CS2103T-T13-1/tp/releases/tag/v1.3.trial).
+2. Download the latest TAA.jar from [here](https://github.com/AY2223S1-CS2103T-T13-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your TAA.
 
 4. Double-click the file to start the app. The GUI appear in your app should be similar as the one shown below:<br>
-   <img src="images/default screen.png" width="500">
+   <img src="images/TAA.png" width="500">
 
 5. Type the command in the command box and press Enter or click the Send button to execute. Some example commands you can try:
    * `task add` `tn/Assignment 1 i/Due ASAP d/12/12/2022`: Creates a task called Assignment 1.
    * `task edit` `1 d/30/12/2022`: Edits the task Assignment 1 to change its deadline to 30/12/2022.
    * `task delete` `1`: Removes the task Assignment 1 from TAA.
 
-6. Refer to the Features below for details of each command.
+6. Refer to the Features below for details of each command. Alternatively, you may refer to the 
+[Command Summary](#Command Summary) section for a quick overview of the commands.
+
+---
+
+## Command summary
+
+This section shows a quick summary of a list of commands that are available in TAA.
+
+| Action                                                                                 | Format, Examples                                                                                                                                                                 |
+|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add student](#add-students-student-add)**                                           | `student add n/studentName p/phoneNumber e/email g/tutorialGroup(optional) t/tags(optional)` e.g. `student add n/James Ho p/98765432 e/a@gmail.com g/T03 t/yearTwo`              |
+| **[Remove student(s)](#remove-students-student-delete)**                               | `student delete <indices>` e.g. `student delete 1 3`                                                                                                                             |
+| **[Edit student](#edit-students-student-edit)**                                        | `student edit <index> n/<studentName>(optional) p/<studentPhone>(optional) e/<studentEmail>(optional) g/<tutorialGroup>(optional) t/<tag>(optional)` e.g. `student edit 1 g/T05` |
+| **[List students](#list-students-student-list)**                                       | `student list`                                                                                                                                                                   |
+| **[Add task](#add-new-task-task-add)**                                                 | `task add tn/<taskName> i/<taskDescription> d/<taskDeadline> s/<student(s)>(optional)` e.g. `task add tn/Grade Mission 1 i/Due Tomorrow d/10/12/2022 s/James Ho`                 |
+| **[Remove task(s)](#remove-task-task-delete)**                                         | `task delete <indices>` e.g. `task delete 2 4`                                                                                                                                   |
+| **[Edit task](#edit-task-task-edit)**                                                  | `task edit <index> tn/<taskName>(optional) i/<taskDescription>(optional) d/<taskDeadline>(optional) s/<student(s)>(optional)` `e.g. task edit 1 d/11/12/2020`                    |
+| **[List tasks](#list-tasks-task-list)**                                                | `task list`                                                                                                                                                                      |
+| **[Add tutorial group](#add-new-tutorial-group-tutorial-add)**                         | `tutorial add g/<tutorialGroup>` e.g. `tutorial add g/T01`                                                                                                                       |
+| **[Remove tutorial group](#remove-tutorial-group-tutorial-delete)**                    | `tutorial delete g/<tutorialGroup>` e.g. `tutorial delete g/T01`                                                                                                                 |
+| **[Enrol student](#enroll-a-student-into-a-group-student-enroll)**                     | `student enroll <index> g/<groupName>` e.g. `student enrol 1 g/T03`                                                                                                              |
+| **[Expel student](#expel-a-student-from-a-group-student-expel)**                       | `student expel <index> g/<groupName>` e.g. `student expel 1 g/T03`                                                                                                               |
+| **[Filter students by group](#view-all-students-in-a-tutorial-group-tutorial-filter)** | `tutorial filter g/<groupName>` e.g. `tutorial filter g/T03`                                                                                                                     |
+| **[Reset filters](#reset-filters-and-show-all-students-student-unfilter)**             | `tutorial reset`                                                                                                                                                                 |
+| **[Mark assignment as graded](#mark-assignment-as-graded-or-ungraded-grade-edit)**     | `grade edit <studentIndex> <taskIndex> gr/T` e.g. `grade edit 1 1 gr/T`                                                                                                          |
+| **[Mark assignment as ungraded](#mark-assignment-as-graded-or-ungraded-grade-edit)**   | `grade edit <studentIndex> <taskIndex> gr/F` e.g. `grade edit 2 1 gr/F`                                                                                                          |
+| **[View assignment grading status](#display-assignment-grade-status-grade-view)**      | `grade view <studentIndex> <taskIndex>` e.g. `grade view 3 7`                                                                                                                    |
+| **[Display the user guide URL](#display-user-guide-url-help-me)**                      | `help me`                                                                                                                                                                        |
+| **[Exit the app](#exit-the-app-bye-bye)**                                              | `bye bye`                                                                                                                                                                        |
 
 ---
 
 ## Features
+This section will explain in detail the functionality of each command in TAA.
+
+Before we start, here are some definitions that will be used in this section:
 
 <div markdown="block" class="alert alert-info">
 
@@ -353,27 +404,3 @@ Exit and close the app
 #### Why can't I enroll a student to a tutorial group?
 - Check whether the specified student and tutorial group exists.
 - Check if you have entered the correct student name.
-
----
-
-## Command summary
-
-| Action                             | Format, Examples                                                                                                                                                                 |
-|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add student**                    | `student add n/studentName p/phoneNumber e/email g/tutorialGroup(optional) t/tags(optional)` e.g. `student add n/James Ho p/98765432 e/a@gmail.com g/T03 t/yearTwo`              |
-| **Remove student(s)**              | `student delete <indices>` e.g. `student delete 1 3`                                                                                                                             |
-| **Edit student**                   | `student edit <index> n/<studentName>(optional) p/<studentPhone>(optional) e/<studentEmail>(optional) g/<tutorialGroup>(optional) t/<tag>(optional)` e.g. `student edit 1 g/T05` |
-| **List students**                  | `student list`                                                                                                                                                                   |
-| **Add task**                       | `task add tn/<taskName> i/<taskDescription> d/<taskDeadline> s/<student(s)>(optional)` e.g. `task add tn/Grade Mission 1 i/Due Tomorrow d/10/12/2022 s/James Ho`                 |
-| **Remove task(s)**                 | `task delete <indices>` e.g. `task delete 2 4`                                                                                                                                   |
-| **Edit task**                      | `task edit <index> tn/<taskName>(optional) i/<taskDescription>(optional) d/<taskDeadline>(optional) s/<student(s)>(optional)` `e.g. task edit 1 d/11/12/2020`                    |
-| **List tasks**                     | `task list`                                                                                                                                                                      |
-| **Add tutorial group**             | `tutorial add g/<tutorialGroup>` e.g. `tutorial add g/T01`                                                                                                                       |
-| **Remove tutorial group**          | `tutorial delete <index>` e.g. `tutorial delete 1`                                                                                                                               |
-| **Enrol student**                  | `student enroll <index> g/<groupName>` e.g. `student enrol 1 g/T03`                                                                                                              |
-| **Expel student**                  | `student expel <index> g/<groupName>` e.g. `student expel 1 g/T03`                                                                                                               |
-| **Mark assignment as graded**      | `grade edit <studentIndex> <taskIndex> gr/T` e.g. `grade edit 1 1 gr/T`                                                                                                          |
-| **Mark assignment as ungraded**    | `grade edit <studentIndex> <taskIndex> gr/F` e.g. `grade edit 2 1 gr/F`                                                                                                          |
-| **View assignment grading status** | `grade view <studentIndex> <taskIndex>` e.g. `grade view 3 7`                                                                                                                    |
-| **Display the user guide URL**     | `help me`                                                                                                                                                                        |
-| **Exit the app**                   | `bye bye`                                                                                                                                                                        |
