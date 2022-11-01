@@ -21,7 +21,7 @@ import seedu.address.model.task.Task;
 public class GradeViewCommand extends Command {
     public static final String COMMAND_WORD = "grade view";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the grade of the student's task "
-            + "by the index number used in the displayed student list and task list. "
+            + "by the index number used in the displayed student list and task list.\n"
             + "Parameters: STUDENT_INDEX TASK_INDEX (must be positive integers)"
             + "\n"
             + "Example: " + COMMAND_WORD + " 1 2";
