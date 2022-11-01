@@ -59,25 +59,44 @@ and tasks.**
 
 This section shows a quick summary of a list of commands that are available in TAA.
 
+### Student Management
+
 | Action                                                                    | Format, Examples                                                                                                                                                                 |
 |---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Add student](#add-students)**                                          | `student add n/studentName p/phoneNumber e/email g/tutorialGroup(optional) t/tags(optional)` e.g. `student add n/James Ho p/98765432 e/a@gmail.com g/T03 t/yearTwo`              |
 | **[Remove student(s)](#remove-students)**                                 | `student delete <indices>` e.g. `student delete 1 3`                                                                                                                             |
 | **[Edit student](#edit-students)**                                        | `student edit <index> n/<studentName>(optional) p/<studentPhone>(optional) e/<studentEmail>(optional) g/<tutorialGroup>(optional) t/<tag>(optional)` e.g. `student edit 1 g/T05` |
 | **[List students](#list-students)**                                       | `student list`                                                                                                                                                                   |
+
+### Task Management
+
+| Action                                                                    | Format, Examples                                                                                                                                                                 |
+|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Add task](#add-new-task)**                                             | `task add tn/<taskName> i/<taskDescription> d/<taskDeadline> s/<student(s)>(optional)` e.g. `task add tn/Grade Mission 1 i/Due Tomorrow d/10/12/2022 s/James Ho`                 |
 | **[Remove task(s)](#remove-task)**                                        | `task delete <indices>` e.g. `task delete 2 4`                                                                                                                                   |
 | **[Edit task](#edit-task)**                                               | `task edit <index> tn/<taskName>(optional) i/<taskDescription>(optional) d/<taskDeadline>(optional) s/<student(s)>(optional)` `e.g. task edit 1 d/11/12/2020`                    |
 | **[List tasks](#list-tasks)**                                             | `task list`                                                                                                                                                                      |
+
+### Tutorial Groups
+
+| Action                                                                    | Format, Examples                                                                                                                                                                 |
 | **[Add tutorial group](#add-new-tutorial-group)**                         | `tutorial add g/<tutorialGroup>` e.g. `tutorial add g/T01`                                                                                                                       |
 | **[Remove tutorial group](#remove-tutorial-group)**                       | `tutorial delete g/<tutorialGroup>` e.g. `tutorial delete g/T01`                                                                                                                 |
 | **[Enrol student](#enroll-a-student-into-a-group)**                       | `student enroll <index> g/<groupName>` e.g. `student enrol 1 g/T03`                                                                                                              |
 | **[Expel student](#expel-a-student-from-a-group)**                        | `student expel <index> g/<groupName>` e.g. `student expel 1 g/T03`                                                                                                               |
 | **[Filter students by group](#view-all-students-in-a-tutorial-group)**    | `tutorial filter g/<groupName>` e.g. `tutorial filter g/T03`                                                                                                                     |
 | **[Reset filters](#reset-filters-and-show-all-students)**                 | `tutorial reset`                                                                                                                                                                 |
+
+### Grades
+
+| Action                                                                    | Format, Examples                                                                                                                                                                 |
 | **[Mark assignment as graded](#mark-assignment-as-graded-or-ungraded)**   | `grade edit <studentIndex> <taskIndex> gr/T` e.g. `grade edit 1 1 gr/T`                                                                                                          |
 | **[Mark assignment as ungraded](#mark-assignment-as-graded-or-ungraded)** | `grade edit <studentIndex> <taskIndex> gr/F` e.g. `grade edit 2 1 gr/F`                                                                                                          |
 | **[View assignment grading status](#display-assignment-grade-status)**    | `grade view <studentIndex> <taskIndex>` e.g. `grade view 3 7`                                                                                                                    |
+
+### General
+
+| Action                                                                    | Format, Examples                                                                                                                                                                 |
 | **[Display the user guide URL](#display-user-guide-url)**                 | `help me`                                                                                                                                                                        |
 | **[Exit the app](#exit-the-app)**                                         | `bye bye`                                                                                                                                                                        |
 
@@ -400,8 +419,7 @@ Exit and close the app
 ## FAQ
 
 #### What if I forget the command format?
-- A list of commands will be displayed after the launch of the program.
-- You can also click on the help button to view the commands.
+- You can click on the help button to view the commands.
 
 #### Why can't I add a student?
 - Check the format of your add command. You can refer to the pop-up message or the help page for the command format.
