@@ -6,7 +6,7 @@ title: User Guide
 ## Welcome to the TAA User Guide!
 ![TAA](/images/taa_main.png)
 
-* Teaching Assistant Assistant (TAA)* is a **desktop app for Teaching Assistants (TA) to track student progress and tasks,
+*Teaching Assistant Assistant (TAA)* is a **desktop app for Teaching Assistants (TA) to track student progress and tasks,
 optimized for use via a Command Line Interface** (CLI) while still having the
 benefits of a Graphical User Interface (GUI). If you can type fast, TAA can get your students and tasks management done
 faster than traditional GUI apps.
