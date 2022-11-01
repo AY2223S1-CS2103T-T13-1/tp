@@ -43,7 +43,7 @@ and tasks.**
 3. Copy the file to the folder you want to use as the home folder for your TAA.
 
 4. Double-click the file to start the app. The GUI appear in your app should be similar as the one shown below:<br>
-   <img src="images/TAA.png" width="500">
+![TAA](/images/taa_main.png)
 
 5. Type the command in the command box and press Enter or click the Send button to execute. Some example commands you can try:
    * `task add` `tn/Assignment 1 i/Due ASAP d/12/12/2022`: Creates a task called Assignment 1.
