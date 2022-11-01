@@ -118,7 +118,8 @@ Before we start, here are some definitions that will be used in this section:
 
 </div>
 
-### Add students
+### Student Management
+#### Add students
 
 Adds a student with the given phone number, email, tutorial group, and tags to the list of students
 
@@ -140,7 +141,7 @@ E.g. `student add n/James Ho p/98765432 e/a@gmail.com g/T03 t/yearTwo`
 - `<tags>` should be alphanumeric with no white space
 </div>
 
-### Remove students
+#### Remove students
 
 Removes the indexed students(s) from the list of students
 
@@ -156,7 +157,7 @@ E.g. `student delete 1 3`
 - You can delete multiple students at once by separating the indices with a space. e.g. `student delete 1 2 3`
 </div>
 
-### Edit students
+#### Edit students
 
 Edits the student by its given index with at least 1 variable specified to change.
 
@@ -179,9 +180,7 @@ E.g. `student edit 1 g/T05`
 - `<tags>` should be alphanumeric with no white space
 </div>
 
-
-
-### List students
+#### List students
 
 Shows a list of all students
 
@@ -189,7 +188,9 @@ Shows a list of all students
 
 <img src="images/student list.png" width="500">
 
-### Add new task
+### Task Management
+
+#### Add new task
 Adds a task to the list of tasks
 
 The task is initially assigned to no students if no student variable is entered
@@ -207,7 +208,7 @@ E.g. `task add tn/Grade Mission 1 i/Due Tomorrow d/10/12/2022 s/James Ho`
 - `student(s)`, referenced by their name, should exist
 </div>
 
-### Remove task
+#### Remove task
 
 Removes the indexed task(s) from the list of tasks
 - Command: `task delete <indices>`
@@ -222,7 +223,7 @@ E.g. `task delete 2 4`
 - You can delete multiple tasks at once by separating the indices with a space. e.g. `task delete 1 2 3`
 </div>
 
-### Edit task
+#### Edit task
 
 Edits the task by its given index with at least 1 variable specified to change.
 
@@ -241,7 +242,7 @@ E.g. `task edit 1 d/11/12/2020`
 - `student(s)`, referenced by their name, should exist
 </div>
 
-### List tasks
+#### List tasks
 
 Shows a list of tasks
 
@@ -249,7 +250,9 @@ Shows a list of tasks
 
 <img src="images/task list.png" width="500">
 
-### Add new tutorial group
+### Tutorial Group
+
+#### Add new tutorial group
 
 Adds the tutorial group with the name `tutorialGroup`
 
@@ -264,7 +267,7 @@ E.g. `tutorial add g/T01`
 - `tutorialGroup` should follow the format Txx, where x is a numeric value, and it should not be blank
 </div>
 
-### List tutorial groups
+#### List tutorial groups
 
 Shows a list of tutorial groups
 
@@ -272,7 +275,7 @@ Shows a list of tutorial groups
 
 <img src="images/tutorial list.png" width="500">
 
-### Remove tutorial group
+#### Remove tutorial group
 
 Removes the tutorial group with the name `tutorialGroup`
 
@@ -294,7 +297,7 @@ E.g. `tutorial delete 1`
 - do a `tutorial list` command first, to see which index the tutorial group is at
 </div>
 
-### Enroll a student into a group
+#### Enroll a student into a group
 
 Enrolls the student at index i to the group named `groupName`
 
@@ -309,7 +312,7 @@ E.g. `student enrol 1 g/T03`
 - `index` must be a positive integer and valid
 </div>
 
-### Expel a student from a group
+#### Expel a student from a group
 
 Removes the student at index i from the group `groupName`.
 
@@ -324,7 +327,7 @@ E.g. `student expel 1 g/T03`
 - `index` must be a positive integer and valid
 </div>
 
-### View all students in a tutorial group
+#### View all students in a tutorial group
 
 Displays only students from the group `groupName` in the GUI.
 
@@ -341,13 +344,15 @@ E.g. tutorial filter g/T01
 - `index` must be a positive integer and valid
 </div>
 
-### Reset filters and show all students
+#### Reset filters and show all students
 
 Undoes the `tutorial filter` command and displays all students in the GUI.
 
 - Command: `student unfilter`
 
-### Mark assignment as graded or ungraded
+### Grades
+
+#### Mark assignment as graded or ungraded
 
 Marks the specified student's assignment as graded (`T`) or ungraded (`F`)
 
@@ -362,7 +367,7 @@ E.g. `grade edit 1 1 gr/T`
 - `index` must be a positive integer and valid
 </div>
 
-### Display assignment grade status
+#### Display assignment grade status
 
 Shows the grade status of the specified student's assignment
 
@@ -377,13 +382,14 @@ E.g. `grade view 3 7`
 - `index` must be a positive integer and valid
 </div>
 
-### Display user guide url
+### General
+#### Display user guide url
 
 Shows a popup with the user guide url in it
 
 - Command: `help me`
 
-### Exit the app
+#### Exit the app
 
 Exit and close the app
 
