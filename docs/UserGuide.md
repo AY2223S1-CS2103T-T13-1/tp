@@ -12,11 +12,11 @@ benefits of a Graphical User Interface (GUI). If you can type fast, TAA can get 
 faster than traditional GUI apps.
 
 ### Using this guide
-If you are viewing this for the first time, you may want to read the [Getting Started](#Getting Started) section first.
-* Check out our [Quick Start](#Quick Start) section for a quick overview of setting up the app for the first time.
-* If you are a new user, you may want to check out the [Command Summary](#Command Summary) section 
+If you are viewing this for the first time, you may want to read the [Getting Started](#getting-started) section first.
+* Check out our [Quick Start](#quick-start) section for a quick overview of setting up the app for the first time.
+* If you are a new user, you may want to check out the [Command Summary](#command-summary) section 
 for a quick overview of the commands.
-* If you have any questions, do check out our [FAQ](#FAQ) section for answers to common questions.
+* If you have any questions, do check out our [FAQ](#FAQ) section for answers to common quest.ons.
 * If you are interested in helping to develop TAA, check out our [Developer Guide](DeveloperGuide.md).
 
 ---
@@ -299,7 +299,7 @@ Shows a list of tutorial groups
 
 #### Remove tutorial group
 
-Removes the tutorial group with the name `tutorialGroup`
+Removes the tutorial group at the specified `index`
 
 - Command: `tutorial delete <index>`
 
@@ -331,7 +331,7 @@ E.g. `student enrol 1 g/T03`
 
 **:information_source: Notes:**<br>
 
-- `index` must be a positive integer and valid
+- `tutorialGroup` must follow the format Txx, where x is a numeric value, and it should not be blank
 </div>
 
 #### Expel a student from a group
@@ -346,7 +346,7 @@ E.g. `student expel 1 g/T03`
 
 **:information_source: Notes:**<br>
 
-- `index` must be a positive integer and valid
+- `tutorialGroup` must follow the format Txx, where x is a numeric value, and it should not be blank
 </div>
 
 #### View all students in a tutorial group
@@ -363,7 +363,7 @@ E.g. tutorial filter g/T01
 
 **:information_source: Notes:**<br>
 
-- `index` must be a positive integer and valid
+- `tutorialGroup` must follow the format Txx, where x is a numeric value, and it should not be blank
 </div>
 
 #### Reset filters and show all students
