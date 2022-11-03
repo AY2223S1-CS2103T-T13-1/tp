@@ -200,6 +200,8 @@ E.g. `student edit 1 g/T05`
   - domain should be at least 2 characters long
 - `<tutorialGroup>` should follow the format Txx, where x is a numeric value, and it should not be blank
 - `<tags>` should be alphanumeric with no white space
+- For commands that take an index, you can parse multiple indexes at once to do the action for multiple items at once.
+  - You can remove multiple students at once by separating the indices with a space. e.g. `student delete 1 2 3`
 </div>
 
 #### List students
@@ -208,7 +210,7 @@ Shows a list of all students
 
 - Command: `student list`
 
-<img src="images/student list.png" width="500">
+![Student List](images/student list.png)
 
 ### Task Management
 
@@ -270,7 +272,7 @@ Shows a list of tasks
 
 - Command: `task list`
 
-<img src="images/task list.png" width="500">
+![Task List](images/task list.png)
 
 ### Tutorial Groups
 
@@ -295,7 +297,7 @@ Shows a list of tutorial groups
 
 - Command: `tutorial list`
 
-<img src="images/tutorial list.png" width="500">
+![Tutorial List](images/tutorial list.png)
 
 #### Remove tutorial group
 
@@ -357,7 +359,7 @@ Displays only students from the group `groupName` in the GUI.
 
 E.g. tutorial filter g/T01
 
-<img src="images/tutorial filter.png" width="500">
+![Tutorial Filter](images/tutorial%20filter.png)
 
 <div markdown="block" class="alert alert-info">
 
