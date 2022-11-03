@@ -138,6 +138,9 @@ Before we start, here are some definitions that will be used in this section:
 * Extraneous parameters for commands that do not take in parameters (such as `help me`, `bye bye`) will be ignored.<br>
   e.g. if you enter `help me pretty p/lease`, it will be interpreted as `help me`.
 
+- For commands that take an index, you can parse multiple indexes at once to do the action for multiple items at once.
+  * You can remove multiple students at once by separating the indices with a space. e.g. `student delete 1 2 3`
+</div>
 </div>
 
 ### Student Management
@@ -201,7 +204,7 @@ E.g. `student edit 1 g/T05`
 - `<tutorialGroup>` should follow the format Txx, where x is a numeric value, and it should not be blank
 - `<tags>` should be alphanumeric with no white space
 - For commands that take an index, you can parse multiple indexes at once to do the action for multiple items at once.
-  - You can remove multiple students at once by separating the indices with a space. e.g. `student delete 1 2 3`
+  - You can edit multiple students at once by separating the indices with a space. e.g. `student edit 1 2 3 g/T03`
 </div>
 
 #### List students
