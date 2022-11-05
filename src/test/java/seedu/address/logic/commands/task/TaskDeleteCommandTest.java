@@ -2,15 +2,16 @@ package seedu.address.logic.commands.task;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.tutorialgroup.TutorialGroupDeleteCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,7 +32,7 @@ public class TaskDeleteCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteTask(taskToDelete);
 
-//        assertCommandSuccess(taskDeleteCommand, model, expectedMessage, expectedModel);
+        // assertCommandSuccess(taskDeleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -47,7 +48,7 @@ public class TaskDeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST_TUTORIAL.getZeroBased());
+        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         TaskDeleteCommand taskDeleteCommand = new TaskDeleteCommand(new Index[] {INDEX_FIRST_TASK});
 
         String expectedMessage = String.format(taskDeleteCommand.MESSAGE_DELETE_TASK_SUCCESS,
@@ -62,16 +63,16 @@ public class TaskDeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showTutorialGroupAtIndex(model, INDEX_FIRST_TUTORIAL);
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-        Index outOfBoundIndex = INDEX_SECOND_TUTORIAL;
+        Index outOfBoundIndex = INDEX_SECOND_TASK;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getTutorialGroupList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getTaskList().size());
 
-        TutorialGroupDeleteCommand tutorialGroupDeleteCommand = new TutorialGroupDeleteCommand(outOfBoundIndex);
+        TaskDeleteCommand taskDeleteCommand = new TaskDeleteCommand(new Index[] {outOfBoundIndex});
 
-        assertCommandFailure(tutorialGroupDeleteCommand, model,
-                Messages.MESSAGE_INVALID_TUTORIAL_GROUP_DISPLAYED_INDEX);
+        assertCommandFailure(taskDeleteCommand, model,
+                Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
