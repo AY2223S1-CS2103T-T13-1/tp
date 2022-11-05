@@ -96,6 +96,8 @@ public class TypicalStudents {
         ab.addTutorialGroup(new TutorialGroup("T02"));
         ab.addTutorialGroup(new TutorialGroup("T03"));
 
+        ab.addTask(new TaskBuilder().build());
+
         return ab;
     }
 
