@@ -141,7 +141,6 @@ Before we start, here are some definitions that will be used in this section:
 - For commands that take an index, you can parse multiple indexes at once to do the action for multiple items at once.
   * You can remove multiple students at once by separating the indices with a space. e.g. `student delete 1 2 3`
 </div>
-</div>
 
 ### Student Management
 #### Add students
@@ -391,7 +390,7 @@ E.g. `grade edit 1 1 gr/T`
 
 **:information_source: Notes:**<br>
 
-- `index` must be a positive integer and valid
+- Both `studentIndex` and `taskIndex` must be positive integers and valid indices
 </div>
 
 #### Display assignment grade status
@@ -406,7 +405,7 @@ E.g. `grade view 3 7`
 
 **:information_source: Notes:**<br>
 
-- `index` must be a positive integer and valid
+- Both `studentIndex` and `taskIndex` must be positive integers and valid indices
 </div>
 
 ### General
