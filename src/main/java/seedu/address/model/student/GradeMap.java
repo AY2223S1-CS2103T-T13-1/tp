@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import seedu.address.model.grade.Grade;
 import seedu.address.model.grade.GradeKey;
-import seedu.address.model.student.exceptions.DuplicateGradeKeyException;
 import seedu.address.model.student.exceptions.GradeKeyNotFoundException;
 
 
