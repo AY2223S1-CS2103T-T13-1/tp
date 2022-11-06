@@ -3,8 +3,10 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -85,6 +87,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 Task editedTask = new Task(taskToEdit.getTaskName(), taskToEdit.getTaskDescription(),
                         taskToEdit.getTaskDeadline(), newStudents);
                 model.setTask(taskToEdit, editedTask);
+                model.updateGrades(taskToEdit, editedTask);
                 model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             }
         }
@@ -106,6 +109,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 Task editedTask = new Task(taskToEdit.getTaskName(), taskToEdit.getTaskDescription(),
                         taskToEdit.getTaskDeadline(), newStudents);
                 model.setTask(taskToEdit, editedTask);
+                model.updateGrades(taskToEdit, editedTask);
                 model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
             }
         }
@@ -301,11 +305,27 @@ public class AddressBook implements ReadOnlyAddressBook {
         return students.hashCode();
     }
 
-    public boolean hasGradeKey(GradeKey gradeKey) {
-        return grades.contains(gradeKey);
-    }
-
     public void addGrade(GradeKey gradeKey, Grade grade) {
         grades.add(gradeKey, grade);
+    }
+
+    /**
+     * Updates the grade map by updating the tasks in the map.
+     * @param taskToEdit the current task associated with student(s)
+     * @param editedTask the task to be associated with taskToEdit's student(s) after the update
+     */
+    public void updateGrades(Task taskToEdit, Task editedTask) {
+        Set<GradeKey> currentGradeKeys = grades.asUnmodifiableObservableMap().keySet();
+        Set<GradeKey> badKeys = new HashSet<>();
+        Map<GradeKey, Grade> toAdd = new HashMap<>();
+        for (GradeKey key : currentGradeKeys) {
+            if (key.task.isSameTask(taskToEdit)) {
+                Grade grade = grades.get(key);
+                toAdd.put(new GradeKey(key.student, editedTask), grade);
+                badKeys.add(key);
+            }
+        }
+        grades.removeAll(badKeys);
+        grades.addAll(toAdd);
     }
 }
