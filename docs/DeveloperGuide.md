@@ -380,7 +380,7 @@ The _Sequence Diagram_ below shows how the components interact with each other f
 
 - **Alternative 2:** Individual command to sort tasks.
     - Pros: User has a choice whether they want their list to be sorted.
-    - Cons: More classes to implement e.g. taskSortCommand.java and taskSortCommandParser.java.
+    - Cons: More classes to implement e.g. `taskSortCommand.java` and `taskSortCommandParser.java`.
 
 ### Mass Actions feature
 
