@@ -240,7 +240,7 @@ The task feature is facilitated by `Task`. It implements the following operation
 * Viewing Tasks
 
 Below is the class diagram for Task.
-<img src="images/TaskClassDiagram.png" width="650" />
+<img src="images/TaskClassDiagram.png" width="950" />
 
 #### Design Considerations
 
