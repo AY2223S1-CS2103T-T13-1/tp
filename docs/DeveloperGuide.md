@@ -3,6 +3,12 @@ layout: page
 title: Developer Guide
 ---
 
+## Welcome to the TAA Developer Guide!
+*Teaching Assistant Assistant (TAA)* is a **desktop app for Teaching Assistants (TA) to track student progress and tasks,
+optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+This developer guide serves the purpose of helping developers to quickly gain the knowledge they need to start contributing in developing TAA.
+
 * Table of Contents
 {:toc}
 
@@ -10,7 +16,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- Mockito for mocking objects in tests
 
 ---
 
@@ -56,7 +62,7 @@ The rest of the App consists of four components.
 
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `student delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 
 Each of the four main components (also shown in the diagram above),
 
@@ -123,7 +129,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2223S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="700" />
+![ModelClassDiagram](images/ModelClassDiagram.png)
 
 The `Model` component,
 
@@ -138,7 +144,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2223S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![StorageClassDiagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 
@@ -156,42 +162,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Sort task by deadline feature
+### Summary of Implementations
 
-#### Implementation
-
-The sort task by deadline mechanism will be implemented without the need to enter additional commands.
-
-Additionally, its feature is exposed in the `List` interface by calling its `sort` method.
-
-Given below is an example usage scenario of adding a new task and how the task sorted by deadline mechanism behaves.
-
-Step 1. The user launches the application and enters the respective `taskAdd` command.
-
-Step 2. If the command is successful, a `task` object is created and will eventually be passed to `UniqueTaskList`.
-
-Step 3. `UniqueTaskList` will add the `Task` object to an object of type `ObservableList<Task>`
-
-Step 4. `UniqueTaskList` will then call its own method `sortByDeadline`
-
-Step 5. `sortByDeadline` will call the `sort` method of the same object of type `ObservableList<Task>` from Step 5.
-
-Step 6. The `sort` method takes in an object of type Comparator which compares two different `Task` objects' based on its deadline variable.
-
-Step 7. The `sort` method then iterate the object of type `ObservableList<Task>` and arrange them according to their deadline in ascending order.
-
-#### Design considerations:
-
-**Aspect: How sorting task by deadline executes:**
-
-- **Alternative 1 (current choice):** sort tasks by default.
-
-    - Pros: Easy to implement.
-    - Cons: Might not be ideal if users do not want it to be sorted.
-
-- **Alternative 2:** Individual command to sort tasks.
-    - Pros: User has a choice whether they want their list to be sorted.
-    - Cons: More classes to implement e.g. taskSortCommand.java and taskSortCommandParser.java.
+| Feature                                                    | Description                                                     |
+|------------------------------------------------------------|-----------------------------------------------------------------|
+| **[Tutorial Group](#tutorial-group-feature)**              | Allows the user to add tutorial groups to students              |
+| **[Task](#task-feature)**                                  | Allows the user to add tasks to students                        |
+| **[Grade](#grade-feature)**                                | Allows the user to add grades to students                       |
+| **[Task Sorting](#sort-task-by-deadline-feature)**         | Allows the user to sort tasks by deadline                       |
+| **[Mass Actions](#mass-actions-feature)**                  | Allows the user to perform actions on multiple students at once |
+| **[Expanding Task List](#expanding-tasklistcard-feature)** | Allows the user to expand the task list to see more details     |
 
 ### Tutorial group feature
 
@@ -229,6 +209,9 @@ The task feature is facilitated by `Task`. It implements the following operation
 * Marking Tasks as done using the Task's index (In Progress)
 * Viewing Tasks
 
+Below is the class diagram for Task.
+<img src="images/TaskClassDiagram.png" width="950" />
+
 #### Design Considerations
 
 The implementation is quite similar to what was done for the base AB3, as well as
@@ -244,58 +227,9 @@ instead opting to defer the creation of the new `Task` to the `Model` itself. Th
 code to parse in all the fields of `Task` and leaving student as a list of Strings, which we then use to search through
 the `Model` to find the students that are assigned to the task.
 
-### Mass Actions feature
+Show below is an activity diagram of how a task is edited.
 
-#### Description
-The idea behind Mass Actions is to be able to chain together multiple commands without having to type them out one
-by one. This is useful for when the user wants to perform the same action on multiple students or tutorial groups.
-
-#### Implementation
-The mass actions feature requires a rework of the parsers, particularly StudentDeleteCommandParser
-and TaskDeleteCommandParser. Instead of parsing a single index, the parsers will parse a range of indices,
-then loop through each index, getting the task before deleting it.
-
-#### Design Considerations
-The implementation is different from the original AB3 implementation, as there were some special considerations
-to keep in mind. The key issue was that we had to do two separate loops, one for getting the list of tasks/students
-to delete, before then proceeding to delete them. This is because if we attempt to do it in a single loop, we
-encounter an error where the list of tasks/students is modified while we are iterating through it.
-
-#### Alternative Considerations
-Another way of doing this instead of completely reworking the commands would be to overload the constructor,
-however, it seemingly would not be as clean as the current implementation, as the current implementation is able
-to handle one or more indices, while the alternative implementation would be doing double work to cover the case with
-one index.
-
-### Expanding `TaskListCard` feature
-
-#### Description
-
-In TAA, the user can specify which `Student`s a `Task` has to be completed for. In the UI, each `Task` is displayed as a `TaskListCard`. The `TaskListCard` can be clicked to show or hide the `Student`s.
-
-The part of the UI highlighted in blue and grey are the `TaskListCard`s. The blue card has been clicked to show the `Student`s, while the grey card has a collapsed `Student` list.
-
-<img src="images/TaskListCard.png" width="650" />
-
-#### Implementation
-
-Every `TaskListCard` contains:
-* a `VBox optionalInfo` UI component which displays the students' names to the user,
-* a `boolean isExpanded` attribute to determine whether to show the `optionalInfo`, and
-* a `void onCardClicked()` method to toggle `isExpanded`.
-
-#### Design Considerations
-
-If a `Task` has no `Student`s,
-* clicking on its `TaskListCard` does nothing, and
-* `"No students are assigned to this task."` is displayed to the user.
-
-#### Alternative Designs Considered
-
-1. **Always show the students for all tasks.** This is rejected because tutorial groups contain many students. This allows very few tasks to be displayed on the UI at one time. This prevents the user from having an at-a-glance view of their tasks.
-2. **Display the students for a task in a pop-up dialog box.** This is rejected because we wish to minimise the number of mouse clicks needed to switch from viewing the students under Task 1 to viewing the students under Task 2.
-    * In the current design, the user only needs to click once on Task 2 to collapse Task 1 and expand Task 2.
-    * This alternative design requires the user to click on the **Close** button on Task 1's dialog box, and then click again on Task 2.
+![Task Edit Activity Diagram](images/TaskEditActivityDiagram.png)
 
 ### Grade feature
 
@@ -405,6 +339,105 @@ In the interest of future extensibility and fast implementation, `Grade` was mad
 
 The `HashMap` Java Collection was chosen because of faster lookups, since in the current iteration of TAA, the `GradeMap` is only used to add and retrieve grades. However, in the future, `GradeMap` can be changed easily to use a `TreeMap` instead. A `TreeMap` implementation would prove useful if more than 2 grades are added and a filter feature is desired, for example, get a list of `Student`s who scored more than a `B` in a particular `Task`. `ArrayList` was rejected because it is cumbersome to implement and is not as performant.
 
+### Sort task by deadline feature
+
+#### Implementation
+
+The sort task by deadline mechanism will be implemented without the need to enter additional commands.
+
+Additionally, its feature is exposed in the `List` interface by calling its `sort` method.
+
+The sort method wil automatically sort its tasks by ascending order whenever a new task is added or an existing task is edited.
+
+Given below is an example usage scenario of adding a new task and how the task sorted by deadline mechanism behaves.
+
+Step 1. The user launches the application and enters the respective `task add` command.
+
+Step 2. If the command is successful, a `task` object is created and will eventually be passed to `UniqueTaskList`.
+
+Step 3. `UniqueTaskList` will add the `Task` object to an object of type `ObservableList<Task>`
+
+Step 4. `UniqueTaskList` will then call its own method `sortByDeadline`
+
+Step 5. `sortByDeadline` will call the `sort` method of the same object of type `ObservableList<Task>` from Step 5.
+
+Step 6. The `sort` method takes in an object of type Comparator which compares two different `Task` objects' based on its deadline variable.
+
+Step 7. The `sort` method then iterate the object of type `ObservableList<Task>` and arrange them according to their deadline in ascending order.
+
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario during task sort when a user adds a new task. Similar interactions take place when a user edits a task or removes a task.
+
+<img src="images/SortTask.png" width="550"/>
+
+#### Design considerations:
+
+**Aspect: How sorting task by deadline executes:**
+
+- **Alternative 1 (current choice):** sort tasks by default.
+
+    - Pros: Easy to implement.
+    - Cons: Might not be ideal if users do not want it to be sorted.
+
+- **Alternative 2:** Individual command to sort tasks.
+    - Pros: User has a choice whether they want their list to be sorted.
+    - Cons: More classes to implement e.g. `taskSortCommand.java` and `taskSortCommandParser.java`.
+
+### Mass Actions feature
+
+#### Description
+The idea behind Mass Actions is to be able to chain together multiple commands without having to type them out one
+by one. This is useful for when the user wants to perform the same action on multiple students or tutorial groups.
+
+#### Implementation
+The mass actions feature requires a rework of the parsers, particularly StudentDeleteCommandParser
+and TaskDeleteCommandParser. Instead of parsing a single index, the parsers will parse a range of indices,
+then loop through each index, getting the task before deleting it.
+
+#### Design Considerations
+The implementation is different from the original AB3 implementation, as there were some special considerations
+to keep in mind. The key issue was that we had to do two separate loops, one for getting the list of tasks/students
+to delete, before then proceeding to delete them. This is because if we attempt to do it in a single loop, we
+encounter an error where the list of tasks/students is modified while we are iterating through it.
+
+#### Alternative Considerations
+Another way of doing this instead of completely reworking the commands would be to overload the constructor,
+however, it seemingly would not be as clean as the current implementation, as the current implementation is able
+to handle one or more indices, while the alternative implementation would be doing double work to cover the case with
+one index.
+
+### Expanding `TaskListCard` feature
+
+#### Description
+
+In TAA, the user can specify which `Student`s a `Task` has to be completed for. In the UI, each `Task` is displayed as a `TaskListCard`. The `TaskListCard` can be clicked to show or hide the `Student`s.
+
+The part of the UI highlighted in blue and grey are the `TaskListCard`s. The blue card has been clicked to show the `Student`s, while the grey card has a collapsed `Student` list.
+
+<img src="images/TaskListCard.png" width="650" />
+
+#### Implementation
+
+Every `TaskListCard` contains:
+* a `VBox optionalInfo` UI component which displays the students' names to the user,
+* a `boolean isExpanded` attribute to determine whether to show the `optionalInfo`, and
+* a `void onCardClicked()` method to toggle `isExpanded`.
+
+#### Design Considerations
+
+If a `Task` has no `Student`s,
+* clicking on its `TaskListCard` does nothing, and
+* `"No students are assigned to this task."` is displayed to the user.
+
+#### Alternative Designs Considered
+
+1. **Always show the students for all tasks.** This is rejected because tutorial groups contain many students. This allows very few tasks to be displayed on the UI at one time. This prevents the user from having an at-a-glance view of their tasks.
+2. **Display the students for a task in a pop-up dialog box.** This is rejected because we wish to minimise the number of mouse clicks needed to switch from viewing the students under Task 1 to viewing the students under Task 2.
+    * In the current design, the user only needs to click once on Task 2 to collapse Task 1 and expand Task 2.
+    * This alternative design requires the user to click on the **Close** button on Task 1's dialog box, and then click again on Task 2.
+
+Here's an activity diagram to demonstrate the Expanding TaskListCard feature.
+<img src="images/TaskExpandActivityDiagram.png" width="350"/>
+
 ---
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -440,54 +473,16 @@ The `HashMap` Java Collection was chosen because of faster lookups, since in the
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                          | I want to …​                                                           | So that I can…​                                        |
-| -------- | ------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------------------------------ |
+|----------|--------------------------------------------------|------------------------------------------------------------------------|--------------------------------------------------------|
 | `* * *`  | new user                                         | see usage instructions                                                 | refer to instructions when I forget how to use the App |
-| `* * *`  | Teaching Assistant                               | be able to manage (CRUD) a list of my students                         |                                                        |
-| `* * *`  | Teaching Assistant                               | be able to manage (CRUD) any student’s task list                       |                                                        |
+| `* * *`  | Teaching Assistant                               | be able to manage (CRUD) a list of my students                         | find and manage my students                            |
+| `* * *`  | Teaching Assistant                               | be able to manage (CRUD) any student’s task list                       | find and manage my tasks                               |
 | `* * *`  | Teaching Assistant                               | keep track of which students’ assignments I have graded and not graded | can find the ungraded assignments faster               |
 | `* * *`  | Teaching Assistant with multiple tutorial groups | keep track of which student is in which group                          | manage students based on their tutorial groups         |
 | `* * *`  | Teaching Assistant                               | be able to assign deadlines to my tasks                                | keep track of the upcoming tasks easily                |
 | `* * *`  | Teaching Assistant                               | a way to do mass actions                                               | can save time                                          |
-| `* * *`  | Teaching Assistant                               | leave comments on students’ submissions                                | can help them learn from their mistakes                |
-| `* * *`  | busy Teaching Assistant                          | want to prioritise tasks based on their deadline                       | can avoid missing deadlines                            |
-
-- As a Teaching Assistant, I want to be able to manage (CRUD) a list of my students. `* * *`
-- As a Teaching Assistant, I want to be able to manage (CRUD) any student’s task list. `* * *`
-- As a Teaching Assistant, I want to keep track of which students’ assignments I have graded and not graded. `* * *`
-- As a Teaching Assistant with multiple tutorial groups, I want to keep track of which student is in which group. `* * *`
-- As a Teaching Assistant, I want to be able to assign deadlines to my tasks. `* * *`
-- As a Teaching Assistant, I want a way to do mass actions (e.g. create a task for each student in a group) so that I can save unnecessary time `* *`
-- As a Teaching Assistant, I want to leave comments on students’ submissions so that students can learn from their mistakes. `* *`
-- As a busy Teaching Assistant, I want to prioritise tasks based on their deadline. `* *`
-
-**(To be added)**
-
-- As a Teaching Assistant, I want to manage each of my student’s progress. `*`
-- As a Teaching Assistant, I want to manage each of my student’s class participation marks. `*`
-- As a Teaching Assistant, I want to be able to estimate how much time I need to complete my tasks. `*`
-- As a Teaching Assistant, I want to be able to categorise students based on how much help I think they need. `*`
-- As a Teaching Assistant, I want to be able to see which student’s question I should reply to first. `*`
-- As a Teaching Assistant, I need to know where and when my next tutorial is held. `*`
-- As a Teaching Assistant, I need to know students' performance in exams. `*`
-- As a Teaching Assistant, I want to divide students into pairs randomly during lessons to encourage teamwork. `*`
-- As a Teaching Assistant, I want to categorise submissions based on students. `*`
-- As a Teaching Assistant, I want to filter out assignments submitted after the deadline so I can penalise accordingly. `*`
-- As a Teaching Assistant, I need to take attendance (mass selection) (for convenience) `*`
-- As a Teaching Assistant, I want to leave comments on students’ submissions so that students can learn from their mistakes. `*`
-- As a Teaching Assistant, I want to send notifications to students who failed to submit their homework on time. `*`
-- As a Teaching Assistant, I want to view the distribution/summary of scores so I can see how well my students have understood the knowledge. `*`
-- As a Teaching Assistant, I want a way to send out mass email so that I won’t miss out on any of my students `*`
-- As a Teaching Assistant, I want a way to do mass actions so that I can save unnecessary time `*`
-- As a Teaching Assistant, I want to track each of my student’s strengths and weaknesses so that I can better nurture their individual learning progress. `*`
-- As a Teaching Assistant, I want a way to separate my stronger and weaker students so that it is easier for me to help them strive towards their academic goal. `*`
-- As a Teaching Assistant, I want a way to classify my students learning at different speeds so that I can better help them grow at their own learning pace. `*`
-- As a Teaching Assistant, I want to classify asked questions to a folder so that my students can refer to it easily without having me to spend unnecessary time repeating myself. `*`
-- As a Teaching Assistant, I want to have fine-grained control over the commands I send using flags in the command line `*`
-- As a Teaching Assistant, I want to be able to use the command line to pipe the output of my program to pipe to different Unix commands `*`
-- As a Teaching Assistant, I want to be able to automate certain tasks such as marking off certain tasks if they are certain events that have passed `*`
-- As a Teaching Assistant, I want a way to export and keep offsite backups of my data so that I do not need to worry of any corruption issues or loss of data\*_ `_`
-- As a Teaching Assistant, I want a way to import data into the program so that I can have multiple systems with the same persistent data._ `_`
-- As a Teaching Assistant, I want a way to randomly select a student’s name in the class so someone can respond to in-class questions. `*`
+| `* *`    | Teaching Assistant                               | leave comments on students’ submissions                                | can help them learn from their mistakes                |
+| `* *`    | busy Teaching Assistant                          | want to prioritise tasks based on their deadline                       | can avoid missing deadlines                            |
 
 ### Use cases
 
@@ -624,9 +619,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resume from step 2.
 
-
-_{More to be added}_
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -677,29 +669,93 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Using the application
 
-### Deleting a student
+#### Student management
+1. Creating, removing, and viewing students
+   
+   1. Create a student with the name "John Doe" using `student add n/John Doe e/abc@example.com p/91234567`. <br>
+      Expected: The UI is updated with the new student list.
+   2. Edit the student with the command `student edit 4 p/97654321`
+   3. Delete the student with the command `student delete 4`
 
-1. Deleting a student while all students are being shown
+#### Task management
+1. Creating, removing, grading and viewing tasks
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+    1. Create a student with the name "Assignment 1" using `task add tn/Assignement 1 i/Complete Assignment 1 d/10/10/2022`. <br>
+    2. Click on the `Tasks` Button on the left side of the screen. <br>
+       Expected: The UI is updated with the new task list.
+    3. Edit the student with the command `task edit 1 s/David Li`
+    4. Double click on the task to view the task details.
+       Expected: The details shows the list of students assigned to the task.
+    5. Grade the student with the command `grade edit 1 1 gr/T`
+    6. Change the view back the students, then switch back to Tasks view, the task should be updated with the new grade. <br>
+**:information_source: This is a known bug with JavaFX**<br>
+    7. Delete the student with the command `task delete 1`
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+#### Tutorial group management
+1. Creating and managing tutorial groups
+   1. Create a new tutorial group with the format TXX. `tutorial add g/T01` 
+   2. See a list of tutorial groups using `tutorial list` <br>
+      Expected: A list of tutorial groups is shown.
+   3. Add a student to the tutorial group with the format `student enroll 1 g/T01`
+   4. The UI should be updated with the new student list with update tutorial group info.
+   5. Filter the student list by tutorial group with the format `tutorial filter g/T01`
+   6. Clear the filter with the format `student unfilter`
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+### General Use Cases
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+#### Help
+1. Type `help me` for a link to the user guide. <br>
+   Expected: A new window is opened with the user guide link.
 
-1. _{ more test cases …​ }_
+#### Exiting the program
+1. Type `bye bye` <br>
+   Expected: The application exits. Data is automatically saved.
 
-### Saving data
+## Appendix: Effort
 
-1. Dealing with missing/corrupted data files
+### Difficulty Level
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+<div markdown="block" class="alert alert-info">
+If the implementation effort required to create AB3 from scratch is 10, the estimated 
+implementation effort of this team is, [0..20] e.g., if you give 8, that means the team's 
+effort is about 80% of that spent on creating AB3. We expect most typical teams to score near to 10.
+</div>
 
-1. _{ more test cases …​ }_
+Difficulty Level: 12
+
+#### Effort required
+Justification for the difficulty level: 
+1. **Moving parts** - While AB3 uses only one entity type, Persons, which was adapted to be our Student, we have
+multiple entities, namely `Student`, `Task`, `TutorialGroup`, and `Grade`. This means that we have to implement
+multiple classes, and multiple classes that interact with each other.
+2. **Different purposes** - While _some_ of the code for AB3 commands could be reused, there were many cases where
+the code had to be redesigned and rewritten in order to fit the purpose of our application.
+    1. For example, the Task Edit Command had to be completely rewritten because we required the ability to 
+search through the current model's list of students using a list of strings, and then generating a CommandOutput
+from that
+    2. Other examples include the all the Grade Commands, which had to be written from scratch, as well as the
+Tutorial Group filtering.
+    3. The grade command uses a Map to store the grades of students, which is a new data structure that we had to
+to add into the code, not previously used in AB3.
+3. **New features** - We have many new features that were not present in AB3, such as the ability to grade students,
+filter, as well as introducing tasks, tutorial groups and grades.
+
+### Challenges Faced
+
+1. **Learning JavaFX** - We had to learn JavaFX in order to implement the GUI. This was a challenge because
+there was a steep learning curve, and we had to learn how to use FXML, as well as how to use the JavaFX API.
+Our efforts include:
+   1. **Creating two views** -- one for Tasks and another for Students, which the user can switch between by clicking
+on the buttons on the left side of the screen.
+   2. **Making the UI interactive**, such as the ability to double click on a task to view the students assigned to the
+task. We had to handle the special case of a task having no students assigned to it by learning how to block users'
+clicks.
+   3. **Making the UI responsive** to resizing by learning how layout, padding, and margins work hand-in-hand to ensure
+that UI components remain well aligned, properly spaced, and sufficiently large to accommodate text. 
+2. **Implementing complex features** - We had to implement many complex features, such as the ability to grade,
+edit tasks, and filter by tutorial group. This was a challenge because we had to design the implementation from
+scratch and think about the the relationships between the different classes.
+3. **Learning Git** - We had to learn how to use Git in order to collaborate on the project. This was a challenge
+as most of us had never used Git before, and we had to learn how to use it in order to collaborate on the project.

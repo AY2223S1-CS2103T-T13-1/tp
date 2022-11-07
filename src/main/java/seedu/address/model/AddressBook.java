@@ -1,8 +1,14 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -54,24 +60,72 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the student list with {@code students}.
+     * {@code students} must not contain duplicate students.
      */
     public void setStudents(List<Student> students) {
         this.students.setStudents(students);
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Edit the student list in the task.
+     */
+    public void editStudentInTask(Model model, Student oldStudent, Student newStudent) {
+        for (Task taskToEdit : tasks) {
+            if (taskToEdit.getStudents() != null) {
+                Set<Student> studentSet = taskToEdit.getStudents();
+                Set<Student> newStudents = new HashSet<>();
+                for (Student stud: studentSet) {
+                    Student student;
+                    if (Objects.equals(stud.getName(), oldStudent.getName())) {
+                        student = newStudent;
+                    } else {
+                        student = stud;
+                    }
+                    newStudents.add(student);
+                }
+                Task editedTask = new Task(taskToEdit.getTaskName(), taskToEdit.getTaskDescription(),
+                        taskToEdit.getTaskDeadline(), newStudents);
+                model.setTask(taskToEdit, editedTask);
+                model.updateGrades(taskToEdit, editedTask);
+                model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+            }
+        }
+    }
+
+    /**
+     * Delete the student list in the task.
+     */
+    public void deleteStudentInTask(Model model, Student student) {
+        for (Task taskToEdit : tasks) {
+            if (taskToEdit.getStudents() != null) {
+                Set<Student> studentSet = taskToEdit.getStudents();
+                Set<Student> newStudents = new HashSet<>();
+                for (Student stud: studentSet) {
+                    if (!Objects.equals(stud.getName(), student.getName())) {
+                        newStudents.add(stud);
+                    }
+                }
+                Task editedTask = new Task(taskToEdit.getTaskName(), taskToEdit.getTaskDescription(),
+                        taskToEdit.getTaskDeadline(), newStudents);
+                model.setTask(taskToEdit, editedTask);
+                model.updateGrades(taskToEdit, editedTask);
+                model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+            }
+        }
+    }
+
+    /**
+     * Replaces the contents of the task list with {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
      */
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the tutorial group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
      */
     public void setTutorialGroups(List<TutorialGroup> groups) {
         this.tutorialGroups.setTutorialGroups(groups);
@@ -95,7 +149,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -103,17 +157,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a student to the address book.
+     * The student must not already exist in the address book.
      */
     public void addStudent(Student p) {
         students.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in the
+     * address book.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -176,7 +231,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     // tutorial group level
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a tutorialGroup with the same identity as {@code tutorialGroup} exists in the address book.
      */
     public boolean hasTutorialGroup(TutorialGroup tutorialGroup) {
         requireNonNull(tutorialGroup);
@@ -184,7 +239,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a tutorialGroup with the same identity as {@code tutorialGroup} exists in the address book.
      */
     public boolean getTutorialGroup(TutorialGroup tutorialGroup) {
         requireNonNull(tutorialGroup);
@@ -192,8 +247,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a tutorialGroup to the address book.
+     * The tutorialGroup must not already exist in the address book.
      */
     public void addTutorialGroup(TutorialGroup toAdd) {
         tutorialGroups.add(toAdd);
@@ -239,7 +294,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public boolean equals(Object other) {
-        // TODO: Add tasks to check
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && students.equals(((AddressBook) other).students));
@@ -247,15 +301,30 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        // TODO: Add tasks to hashcode
         return students.hashCode();
-    }
-
-    public boolean hasGradeKey(GradeKey gradeKey) {
-        return grades.contains(gradeKey);
     }
 
     public void addGrade(GradeKey gradeKey, Grade grade) {
         grades.add(gradeKey, grade);
+    }
+
+    /**
+     * Updates the grade map by updating the tasks in the map.
+     * @param taskToEdit the current task associated with student(s)
+     * @param editedTask the task to be associated with taskToEdit's student(s) after the update
+     */
+    public void updateGrades(Task taskToEdit, Task editedTask) {
+        Set<GradeKey> currentGradeKeys = grades.asUnmodifiableObservableMap().keySet();
+        Set<GradeKey> badKeys = new HashSet<>();
+        Map<GradeKey, Grade> toAdd = new HashMap<>();
+        for (GradeKey key : currentGradeKeys) {
+            if (key.task.isSameTask(taskToEdit)) {
+                Grade grade = grades.get(key);
+                toAdd.put(new GradeKey(key.student, editedTask), grade);
+                badKeys.add(key);
+            }
+        }
+        grades.removeAll(badKeys);
+        grades.addAll(toAdd);
     }
 }
