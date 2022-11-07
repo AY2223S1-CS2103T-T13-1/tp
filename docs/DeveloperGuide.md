@@ -727,10 +727,10 @@ Difficulty Level: 12
 
 #### Effort required
 Justification for the difficulty level: 
-1. Moving parts - While AB3 uses only one entity type, Persons, which was adapted to be our Student, we have
-multiple entities, namely Student, Task, Tutorial Group, and Grade. This means that we have to implement
+1. **Moving parts** - While AB3 uses only one entity type, Persons, which was adapted to be our Student, we have
+multiple entities, namely `Student`, `Task`, `TutorialGroup`, and `Grade`. This means that we have to implement
 multiple classes, and multiple classes that interact with each other.
-2. Different purposes - While _some_ of the code for AB3 commands could be reused, there were many cases where
+2. **Different purposes** - While _some_ of the code for AB3 commands could be reused, there were many cases where
 the code had to be redesigned and rewritten in order to fit the purpose of our application.
     1. For example, the Task Edit Command had to be completely rewritten because we required the ability to 
 search through the current model's list of students using a list of strings, and then generating a CommandOutput
@@ -739,7 +739,7 @@ from that
 Tutorial Group filtering.
     3. The grade command uses a Map to store the grades of students, which is a new data structure that we had to
 to add into the code, not previously used in AB3.
-3. New features - We have many new features that were not present in AB3, such as the ability to grade students,
+3. **New features** - We have many new features that were not present in AB3, such as the ability to grade students,
 filter, as well as introducing tasks, tutorial groups and grades.
 
 ### Challenges Faced
