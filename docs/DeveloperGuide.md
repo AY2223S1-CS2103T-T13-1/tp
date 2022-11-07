@@ -691,7 +691,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The details shows the list of students assigned to the task.
     5. Grade the student with the command `grade edit 1 1 gr/T`
     6. Change the view back the students, then switch back to Tasks view, the task should be updated with the new grade. <br>
-**:information_source: This is a know bug with JavaFX**<br>
+**:information_source: This is a known bug with JavaFX**<br>
     7. Delete the student with the command `task delete 1`
 
 #### Tutorial group management
@@ -716,4 +716,37 @@ testers are expected to do more *exploratory* testing.
 
 ## Appendix: Effort
 
+### Difficulty Level
 
+<div markdown="block" class="alert alert-info">
+If the implementation effort required to create AB3 from scratch is 10, the estimated 
+implementation effort of this team is, [0..20] e.g., if you give 8, that means the team's 
+effort is about 80% of that spent on creating AB3. We expect most typical teams to score near to 10.
+</div>
+
+Difficulty Level: 12
+
+#### Effort required
+Justification for the difficulty level: 
+1. Moving parts - While AB3 uses only one entity type, Persons, which was adapted to be our Student, we have
+multiple entities, namely Student, Task, Tutorial Group, and Grade. This means that we have to implement
+multiple classes, and multiple classes that interact with each other.
+2. Different purposes - While _some_ of the code for AB3 commands could be reused, there were many cases where
+the code had to be redesigned and rewritten in order to fit the purpose of our application.
+    1. For example, the Task Edit Command had to be completely rewritten because we required the ability to 
+search through the current model's list of students using a list of strings, and then generating a CommandOutput
+from that
+    2. Other examples include the all the Grade Commands, which had to be written from scratch, as well as the
+Tutorial Group filtering.
+3. New features - We have many new features that were not present in AB3, such as the ability to grade students,
+filter, as well as introducing tasks, tutorial groups and grades.
+
+### Challenges Faced
+
+1. **Learning JavaFX** - We had to learn JavaFX in order to implement the GUI. This was a challenge because
+there was a steep learning curve, and we had to learn how to use FXML, as well as how to use the JavaFX API.
+2. **Implementing complex features** - We had to implement many complex features, such as the ability to grade,
+edit tasks, and filter by tutorial group. This was a challenge because we had to design the implementation from
+scratch and think about the the relationships between the different classes.
+3. **Learning Git** - We had to learn how to use Git in order to collaborate on the project. This was a challenge
+as most of us had never used Git before, and we had to learn how to use it in order to collaborate on the project.
