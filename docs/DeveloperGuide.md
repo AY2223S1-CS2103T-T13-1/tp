@@ -17,7 +17,6 @@ This developer guide serves the purpose of helping developers to quickly gain th
 ## **Acknowledgements**
 
 - Mockito for mocking objects in tests
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ---
 
