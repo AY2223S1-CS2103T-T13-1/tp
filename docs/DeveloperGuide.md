@@ -738,6 +738,8 @@ search through the current model's list of students using a list of strings, and
 from that
     2. Other examples include the all the Grade Commands, which had to be written from scratch, as well as the
 Tutorial Group filtering.
+    3. The grade command uses a Map to store the grades of students, which is a new data structure that we had to
+to add into the code, not previously used in AB3.
 3. New features - We have many new features that were not present in AB3, such as the ability to grade students,
 filter, as well as introducing tasks, tutorial groups and grades.
 
