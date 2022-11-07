@@ -188,7 +188,7 @@ Step 6. The `sort` method takes in an object of type Comparator which compares t
 
 Step 7. The `sort` method then iterate the object of type `ObservableList<Task>` and arrange them according to their deadline in ascending order.
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario during task sort when a user adds a new task.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario during task sort when a user adds a new task. Similar interactions take place when a user edits a task or removes a task.
 <img src="images/SortTask.png" width="550"/>
 #### Design considerations:
 
